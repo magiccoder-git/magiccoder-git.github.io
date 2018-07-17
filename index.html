@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <title>magiCCoder ❤️ open source  </title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+        <link href="https://file.myfontastic.com/Qa2zeeHgE5YZSJKbXBTWAB/icons.css" rel="stylesheet">
+        <link href="./style.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    </head>
+    <body>
+        <div class="title-h fixed">
+                <h1 id="h-h1">magiCCoder ❤️ open source</h1>
+        </div>
+    
+        <div class="container">
+            <div class="row">
+                    <div id="c1" class="col-4 fixed" >
+                        <div id="memberView" class="memberView"><h4>Member:</h4></div>
+
+    
+            
+                    </div>
+                    <div id="c2" class="col-8 scrollit">
+                            <div class="card project">
+                                <div class="card-header">
+                                    Freaxbot <span class="badge badge-primary">GO</span>
+                                </div>
+                                <div class="container">
+                                <div id="Freaxbot"class="row">
+          
+                                     
+                                </div>
+                                </div>
+                            </div>
+                            <div class="card project">
+                                    <div class="card-header">
+                                        Support++ <span class="badge badge-warning">JS</span>
+                                    </div>
+    
+                                    <div id="Support-pp"class="card-group">
+          
+                                              
+                                        </div>
+                            </div>
+                            <div class="card project">
+                                    <div class="card-header">
+                                        magiccoder-git <span class="badge badge-secondary">UNKNOW</span>
+                                    </div>
+    
+                                    <div id="magiccoder-git"class="card-group">
+          
+                                              
+                                        </div>
+                            </div>
+            
+            </div>
+        </div>
+
+
+<script>
+const org = ["Freaxbot", "Support-pp", "magiccoder-git"]
+for(var i = 0; i < org.length; i++){
+    var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://api.github.com/orgs/"+org[i]+"/repos",
+    "method": "GET"
+    }
+
+$.ajax(settings).done(function (response) {
+    for(var i = 0; i < response.length; i++){
+        if (response[i].fork == false){
+            if (response[i].archived == true){
+                document.getElementById(response[i].owner.login).innerHTML +=  '       <div class="col-5"><div class="card pti archived" style="width: 18rem;"> <div class="card-body"><h5 class="card-title">'+response[i].name+'</h5> <p class="card-text">'+response[i].description+'</p><a href="'+response[i].html_url +'" class="btn">Go to GitHub</a></div></div></div>'
+            }else{
+                console.log("NAME :: " + response[i].name + " ORG :: " + response[i].owner.login)
+                document.getElementById(response[i].owner.login).innerHTML +=  '       <div class="col-5"><div class="card pti" style="width: 18rem;"> <div class="card-body"><h5 class="card-title">'+response[i].name+'</h5> <p class="card-text">'+response[i].description+'</p><a href="'+response[i].html_url +'" class="btn">Go to GitHub</a></div></div></div>'
+            }
+    }
+    }
+});
+}
+
+
+var userL = ["d"];
+for(var i = 0; i < org.length; i++){
+    var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://api.github.com/orgs/"+org[i]+"/members",
+    "method": "GET"
+    }
+
+$.ajax(settings).done(function (response) {
+
+    console.log("response.length; :: " + response.length );
+    
+    for(var i = 0; i < response.length; i++){
+        console.log("tard");
+       
+      if (document.getElementById("user" + response[i].login ) == null){
+        document.getElementById("memberView").innerHTML += '<div class="user" id="user'+response[i].login+'"> <img id="avatar" src="'+response[i].avatar_url+'" height="40px" width="40px"> <label>'+response[i].login+'</label> </div>';
+             /*
+            if (response[i].login != userL[i]){
+                userL += response[i].login;
+                console.log("member :: "  + response[i].login )
+            }
+              */
+        }
+        }
+       
+      
+    
+
+});
+}
+
+
+</script>
+
+    </body>
+</html>
